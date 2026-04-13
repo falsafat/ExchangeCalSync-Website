@@ -250,6 +250,48 @@
             text-decoration: underline;
         }
 
+        /* Support Section */
+        .support-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .support-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .support-email {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .support-email:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        .support-response {
+            margin-top: 1.5rem;
+            font-size: 0.85rem !important;
+            color: #636e7b !important;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -285,6 +327,7 @@
         <div class="logo">ExchangeCalSync</div>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#support">Support</a>
             <a href="#privacy">Privacy</a>
         </div>
     </nav>
@@ -316,6 +359,17 @@
                 <h3>Total Privacy</h3>
                 <p>100% processing happens on your local machine. Passwords never touch disk, living securely encrypted inside your native macOS Keychain. No telemetry, no external tracking.</p>
             </div>
+        </div>
+    </section>
+
+    <section id="support">
+        <h2 class="section-title">Support</h2>
+        <p class="section-subtitle">Need help getting set up? We're here for you.</p>
+
+        <div class="support-card">
+            <p>If you're experiencing issues with syncing, configuration, or anything else, feel free to reach out directly. We typically respond within 24 hours.</p>
+            <a href="mailto:mrgx4fun@gmail.com" class="support-email">✉ Contact Support</a>
+            <p class="support-response">You can also include your macOS version and a brief description of the issue to help us assist you faster.</p>
         </div>
     </section>
 
