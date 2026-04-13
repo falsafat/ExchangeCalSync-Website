@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExchangeCalSync for macOS</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --card-bg: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            animation: fadeInDown 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            max-width: 800px;
+            animation: fadeInDown 0.8s ease 0.2s forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease 0.4s forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInDown 0.8s ease 0.6s forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Features Section */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .privacy-content h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .privacy-content p, .privacy-content ul {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-content ul {
+            padding-left: 1.5rem;
+        }
+
+        .privacy-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-content strong {
+            color: #e2e8f0;
+        }
+
+        .privacy-content a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        
+        .privacy-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--card-border);
+            margin-top: 5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .privacy-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ExchangeCalSync</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#privacy">Privacy</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="badge">macOS Menu Bar Utility</div>
+        <h1>Your Work Calendar, Natively on your Mac.</h1>
+        <p class="hero-subtitle">Seamlessly sync Microsoft Exchange to Apple Calendar. Designed for strict enterprise environments, corporate proxies, and Zscaler.</p>
+        <a href="#" class="btn-primary" onclick="alert('The application is currently awaiting review by the Mac App Store. Check back soon!')">Available on Mac App Store (Soon)</a>
+    </header>
+
+    <section id="features">
+        <h2 class="section-title">Built for the Enterprise</h2>
+        <p class="section-subtitle">A robust sync engine that works where traditional Autodiscover fails.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>Proxy Resilient</h3>
+                <p>Engineered with preemptive Basic Auth and exponential backoffs to effortlessly bypass TLS tunnels, Zscaler constraints, and strict corporate proxies that break standard apps.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3>Native Integration</h3>
+                <p>A completely invisible, lightweight menu-bar agent that performs incremental background synchronization. Your work events instantly populate across your iPhone, iPad, watchOS, and CarPlay.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <h3>Total Privacy</h3>
+                <p>100% processing happens on your local machine. Passwords never touch disk, living securely encrypted inside your native macOS Keychain. No telemetry, no external tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="privacy">
+        <h2 class="section-title">Privacy Policy</h2>
+        <p class="section-subtitle">We believe your data is yours alone.</p>
+        
+        <div class="privacy-container">
+            <div class="privacy-content">
+                <p><strong>Last updated: April 12, 2026</strong></p>
+                <p>ExchangeCalSync ("the App") is a macOS menu-bar application that synchronizes calendar events from a Microsoft Exchange Server into Apple Calendar. Your privacy is paramount. This policy explains how the App handles your data.</p>
+
+                <h2>Data Collection</h2>
+                <p><strong>ExchangeCalSync does not collect, transmit, or share any personal data with the developer or any third party.</strong></p>
+                <p>All data processed by the App stays entirely on your local device.</p>
+
+                <h2>Data Stored Locally</h2>
+                <p>The App stores the following data <strong>locally on your Mac only</strong>:</p>
+                <ul>
+                    <li><strong>Exchange username & password</strong> — Stored securely in the encrypted macOS Keychain, used exclusively to authenticate with your authorized Exchange server.</li>
+                    <li><strong>Sync state & mappings</strong> — Stored in a local SQLite database in Application Support to track incremental event updates efficiently.</li>
+                    <li><strong>Application logs</strong> — Stored locally for debugging purposes. Any Personally Identifiable Information (PII) is automatically redacted before logging.</li>
+                </ul>
+
+                <h2>Network Communication</h2>
+                <p>The App connects <strong>strictly</strong> to the specific Exchange sever URL you configure during setup. All underlying connections are forced over HTTPS (utilizing TLS 1.2+ protocols). The App never reaches out to external analytics services, telemetry dashboards, or tracking endpoints.</p>
+
+                <h2>Calendar Access</h2>
+                <p>The App requests explicit permission to access Apple Calendar via the native macOS EventKit framework solely to populate your synced schedule. Your local calendar data is inherently protected by macOS Sandboxing rules and is never transmitted out.</p>
+
+                <h2>Data Retention</h2>
+                <p>Your configuration remains on your device for the duration the App is installed. Uninstalling the application natively cleans up local database files. You may manually clear stored credentials at any time in the App's "Account" settings tab or via the Keychain Access utility.</p>
+
+                <h2>Changes & Contact</h2>
+                <p>If this policy structurally changes, the updated version will be reflected directly on this page with a new timestamp.</p>
+                <p>For questions or support regarding data handling, please refer to our documentation.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 ExchangeCalSync. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
