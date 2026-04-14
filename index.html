@@ -262,6 +262,33 @@
             font-size: 0.95rem;
         }
 
+        /* Screenshots Section */
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            display: block;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+        }
+
         /* Privacy Policy Section */
         .privacy-container {
             background: var(--card-bg);
@@ -385,6 +412,7 @@
         <div class="logo">ExchangeCalSync</div>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#screenshots">Screenshots</a>
             <a href="#changelog">What's New</a>
             <a href="#support">Support</a>
             <a href="#privacy">Privacy</a>
@@ -418,6 +446,23 @@
                 <span class="feature-icon">🔒</span>
                 <h3>Total Privacy</h3>
                 <p>100% processing happens on your local machine. Passwords never touch disk, living securely encrypted inside your native macOS Keychain. No telemetry, no external tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots">
+        <h2 class="section-title">See It in Action</h2>
+        <p class="section-subtitle">A clean, seamless menu bar utility.</p>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="screenshots/1_Hero_SyncStatus.png" alt="Sync Status Window">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/2_Privacy_Security.png" alt="Account Setup & Security">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/3_Enterprise_Features.png" alt="Sync Filtering Options">
             </div>
         </div>
     </section>
