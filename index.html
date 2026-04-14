@@ -76,7 +76,6 @@
             color: var(--text-primary);
         }
 
-        /* Hero Section */
         header {
             min-height: 100vh;
             display: flex;
@@ -86,6 +85,17 @@
             text-align: center;
             padding: 0 20px;
             margin-top: 60px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(-20px);
         }
 
         .badge {
@@ -144,6 +154,54 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Changelog Section */
+        .changelog-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .changelog-entry {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .changelog-entry:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .changelog-entry h3 {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .changelog-entry h3 span {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+
+        .changelog-entry ul {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+        }
+
+        .changelog-entry li {
+            margin-bottom: 0.75rem;
         }
 
         /* Features Section */
@@ -327,12 +385,14 @@
         <div class="logo">ExchangeCalSync</div>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#changelog">What's New</a>
             <a href="#support">Support</a>
             <a href="#privacy">Privacy</a>
         </div>
     </nav>
 
     <header>
+        <img src="app-icon.png" alt="ExchangeCalSync Icon" class="app-icon">
         <div class="badge">macOS Menu Bar Utility</div>
         <h1>Your Work Calendar, Natively on your Mac.</h1>
         <p class="hero-subtitle">Seamlessly sync Microsoft Exchange to Apple Calendar. Designed for strict enterprise environments, corporate proxies, and Zscaler.</p>
@@ -358,6 +418,30 @@
                 <span class="feature-icon">🔒</span>
                 <h3>Total Privacy</h3>
                 <p>100% processing happens on your local machine. Passwords never touch disk, living securely encrypted inside your native macOS Keychain. No telemetry, no external tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="changelog">
+        <h2 class="section-title">What's New</h2>
+        <p class="section-subtitle">Latest updates and features for ExchangeCalSync.</p>
+        
+        <div class="changelog-container">
+            <div class="changelog-entry">
+                <h3>Version 1.1.0 <span>April 2026</span></h3>
+                <ul>
+                    <li><strong>Auto Authentication:</strong> The app will now automatically figure out if Basic, NTLM, or Kerberos works during setup.</li>
+                    <li><strong>Fullscreen Popover Fix:</strong> Fixed a bug where the menu bar popover would fail to open over full-screen apps like Safari or Xcode.</li>
+                    <li><strong>Duplicate Prevention:</strong> Reinstalling the app will now automatically link to existing events in Apple Calendar to prevent duplicate entries.</li>
+                </ul>
+            </div>
+            <div class="changelog-entry">
+                <h3>Version 1.0.0 <span>March 2026</span></h3>
+                <ul>
+                    <li>Initial release of ExchangeCalSync.</li>
+                    <li>Supports invisible background syncing every 5 minutes.</li>
+                    <li>Built-in Setup Wizard for effortless setup with strict corporate proxies.</li>
+                </ul>
             </div>
         </div>
     </section>
